@@ -20,3 +20,4 @@ public ActionResult Create([Bind(Include ="Title")]GalleryViewModel model,List<F
     return View(model);
 }
 ```
+In above example, uploadedFiles parameter will have the information for all the uploaded files. 
