@@ -1,18 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using FileUploadDemo.ExtensionMethods;
-using System.IO;
 
-namespace FileUploadDemo.Models
+namespace FileUploadHelper
 {
-    public class UploadFileAttribute: ActionFilterAttribute
+    public class RetrieveFileInformationAttribute : ActionFilterAttribute
     {
-        private readonly bool _saveToDisk;
-
-        public UploadFileAttribute(bool saveToDisk=true)
-        {
-            this._saveToDisk = saveToDisk;
-        }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var fileInformation = new List<FileInformation>();
@@ -21,7 +13,7 @@ namespace FileUploadDemo.Models
             {
                 var path = filterContext.HttpContext.Server.MapPath("~/Content/uploads");
                 var request = filterContext.HttpContext.Request;
-                if (request != null && request.Files.Count>0)
+                if (request != null && request.Files.Count > 0)
                 {
                     foreach (string uploadedFile in request.Files)
                     {
@@ -29,10 +21,6 @@ namespace FileUploadDemo.Models
                         {
                             var fileInfo = request.Files[uploadedFile].GetFileInformation();
                             fileInformation.Add(fileInfo);
-                            if(_saveToDisk)
-                            {
-                                request.Files[uploadedFile].SaveAs(Path.Combine(path, fileInfo.FileName));
-                            }
                         }
                     }
                 }

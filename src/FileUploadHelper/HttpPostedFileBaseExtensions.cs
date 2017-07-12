@@ -1,11 +1,10 @@
-﻿using FileUploadDemo.Models;
-using System;
+﻿using System;
 using System.IO;
 using System.Web;
 
-namespace FileUploadDemo.ExtensionMethods
+namespace FileUploadHelper
 {
-    public static class HelperExtensionMethods
+    public static class HttpPostedFileBaseExtensions
     {
         public static string GetFileName(this HttpPostedFileBase file)
         {

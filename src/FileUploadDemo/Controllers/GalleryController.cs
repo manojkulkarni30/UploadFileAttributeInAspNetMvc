@@ -1,4 +1,5 @@
 ﻿using FileUploadDemo.Models;
+using FileUploadHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,14 @@ namespace FileUploadDemo.Controllers
                 .Include("Picture")
                 .Select(c => new GalleryViewModel
                 {
-                    Id=c.Id,
-                    Title=c.Title,
-                    PictureId=c.PictureId,
-                    DateCreated=c.DateCreated,
-                    DateUpdated=c.DateUpdated,
-                    FileName=c.Picture.FileName
+                    Id = c.Id,
+                    Title = c.Title,
+                    PictureId = c.PictureId,
+                    DateCreated = c.DateCreated,
+                    DateUpdated = c.DateUpdated,
+                    FileName = c.Picture.FileName
                 }).ToList();
-            model.ForEach(c =>
-            {
-                c.PictureUrl = Url.Content("~/Content/uploads/" + c.FileName);
-            });
+            model.ForEach(c => c.PictureUrl = Url.Content("~/Content/uploads/" + c.FileName));
 
             return View(model);
         }
@@ -37,14 +35,14 @@ namespace FileUploadDemo.Controllers
         }
 
         [HttpPost]
-        [UploadFile]
-        public ActionResult Create([Bind(Include ="Title")]GalleryViewModel model,List<FileInformation> uploadedFiles)
+        [RetrieveFileInformation]
+        public ActionResult Create([Bind(Include = "Title")]GalleryViewModel model, List<FileInformation> uploadedFiles)
         {
-            if(uploadedFiles.Count==0)
+            if (uploadedFiles.Count == 0)
             {
                 ModelState.AddModelError("", "Please upload a file");
             }
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var file = uploadedFiles.FirstOrDefault();
                 if (file != null)
@@ -53,8 +51,8 @@ namespace FileUploadDemo.Controllers
                     var picture = new Picture()
                     {
                         FileName = file.FileName,
-                        BinaryData=file.BinaryData,
-                        MimeType=file.ContentType
+                        BinaryData = file.BinaryData,
+                        MimeType = file.ContentType
                     };
 
                     context.Pictures.Add(picture);
