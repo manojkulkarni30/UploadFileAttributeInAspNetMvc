@@ -1,10 +1,10 @@
-# Upload File Attribute In AspNetMvc
+# Retrieve File Information Attribute In AspNetMvc
 
-Simple upload file attribute to process the uploaded files and get the required information like binary information, filename, file extension and content type for each uploaded file as a parameter to an action method. It will help to reduce the code and get the required information easily so that we can easily save that information in database. 
+Simple RetrieveFileInformation file attribute to process the uploaded files and get the required information like binary information, filename, file extension and content type for each uploaded file as a parameter to an action method. It will help to reduce the code and get the required information easily so that we can easily save that information in database. 
 
-```
+```csharp
 [HttpPost]
-[UploadFile]
+[RetrieveFileInformation]
 public ActionResult Create([Bind(Include ="Title")]GalleryViewModel model,List<FileInformation> uploadedFiles)
 {
     if(uploadedFiles.Count==0)
