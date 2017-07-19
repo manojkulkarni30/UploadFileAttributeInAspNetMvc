@@ -1,0 +1,13 @@
+version: 1.0.0-{build}
+configuration: Release
+
+branches:
+  only:
+    - master
+
+before_build:
+  - nuget restore FileUploadHelperLibrary.sln
+
+build:
+  project: FileUploadHelperLibrary.sln       
+  verbosity: minimal
