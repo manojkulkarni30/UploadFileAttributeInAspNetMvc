@@ -15,11 +15,11 @@ namespace FileUploadHelper
                 var request = filterContext.HttpContext.Request;
                 if (request != null && request.Files.Count > 0)
                 {
-                    foreach (string uploadedFile in request.Files)
+                    for (int i = 0; i < request.Files.Count; i++)
                     {
-                        if (request.Files[uploadedFile].ContentLength > 0)
+                        if (request.Files[i].ContentLength > 0)
                         {
-                            var fileInfo = request.Files[uploadedFile].GetFileInformation();
+                            var fileInfo = request.Files[i].GetFileInformation();
                             fileInformation.Add(fileInfo);
                         }
                     }
