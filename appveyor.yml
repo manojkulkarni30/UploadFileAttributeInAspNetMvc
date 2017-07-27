@@ -1,6 +1,13 @@
 version: 1.0.0-{build}
 configuration: Release
 
+#---------------------------------#
+#  Skip builds for doc changes    #
+#---------------------------------#
+skip_commits:
+  # Regex for matching commit message
+  message: /\(doc\).*/
+
 branches:
   only:
     - master

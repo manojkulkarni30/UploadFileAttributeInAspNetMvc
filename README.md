@@ -1,5 +1,7 @@
 # Retrieve File Information Attribute In AspNetMvc
 
+[![Build status](https://ci.appveyor.com/api/projects/status/dacpl0h43tpb1271?svg=true)](https://ci.appveyor.com/project/manojkulkarni30/uploadfileattributeinaspnetmvc)
+
 Simple RetrieveFileInformation file attribute to process the uploaded files and get the required information like binary information, filename, file extension and content type for each uploaded file as a parameter to an action method. It will help to reduce the code and get the required information easily so that we can easily save that information in database. 
 
 ```csharp
